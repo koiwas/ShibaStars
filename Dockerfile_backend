@@ -1,6 +1,6 @@
 FROM python:3.9
 
-# make app dier
+# make app dir
 WORKDIR /app
 
 # pip instarll
