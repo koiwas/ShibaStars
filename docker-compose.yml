@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
     frontend:
@@ -23,16 +23,17 @@ services:
         volumes:
             - ./backend:/app
         environment:
-            - DATABASE_URL=postgres://user:password@db:5432/mydatabase
+            - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+            - FLASK_APP=src/__init__.py
         depends_on:
             - db
 
     db:
-        image: postgres:latest
+        image: postgres:12
         environment:
-            POSTGRES_USER: user
-            POSTGRES_PASSWORD: password
-            POSTGRES_DB: dbname
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_NAME}
         ports:
             - "5432:5432"
         volumes:
